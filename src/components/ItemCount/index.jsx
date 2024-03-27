@@ -1,18 +1,25 @@
 import { useState } from "react";
 
-export default function ItemCount() {
+export default function ItemCount({ onItemAdded }) {
   const [count, setCount] = useState(0);
+  const [stock, setStock] = useState(5);
+
+  const [isAdded, setIsAdded] = useState(false);
+
+  const handleAdd = () => {
+    setIsAdded(true);
+    onItemAdded(count);
+  };
 
   const increment = () => {
+    if (count === stock) return;
+
     setCount(count + 1);
   };
 
   const decrement = () => {
+    if (count === 0) return;
     setCount(count - 1);
-  };
-
-  const addToCart = () => {
-    // Add logic to add item to cart
   };
 
   return (
@@ -33,12 +40,16 @@ export default function ItemCount() {
         </button>
       </div>
 
-      <button
-        className="bg-teal-950 hover:bg-teal-900 text-white font-bold py-2 px-4 rounded"
-        onClick={addToCart}
-      >
-        Adicionar ao carrinho
-      </button>
+      {!isAdded ? (
+        <button
+          className="bg-teal-950 hover:bg-teal-900 text-white font-bold py-2 px-4 rounded"
+          onClick={handleAdd}
+        >
+          Adicionar ao carrinho
+        </button>
+      ) : (
+        ""
+      )}
     </div>
   );
 }

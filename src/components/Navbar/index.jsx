@@ -1,7 +1,8 @@
 import { IoMdHeartEmpty } from "react-icons/io";
 import CartWidget from "../CartWidget";
+import { useEffect } from "react";
 
-export default function Navbar() {
+export default function Navbar({ itemsOnCart = 0 }) {
   const listItems = [
     {
       id: 1,
@@ -30,6 +31,10 @@ export default function Navbar() {
     },
   ];
 
+  useEffect(() => {
+    console.log("Items on cart:", itemsOnCart);
+  }, [itemsOnCart]);
+
   return (
     <nav className="fixed w-screen h-16 p-4 flex justify-between bg-[#FDFDFD]">
       <h1 className="font-TitanOne text-xl">MyNikes</h1>
@@ -47,7 +52,7 @@ export default function Navbar() {
         <div className="cursor-pointer hover:bg-gray-300 p-[10px] flex items-center justify-center rounded-full">
           <IoMdHeartEmpty size={24} />
         </div>
-        <CartWidget itemCount={0} />
+        <CartWidget itemCount={itemsOnCart} />
       </div>
     </nav>
   );

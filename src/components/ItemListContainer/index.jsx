@@ -2,7 +2,12 @@ import ItemCount from "../ItemCount";
 import ItemList from "../ItemList";
 import { useEffect, useState } from "react";
 
-export default function ItemListContainer() {
+export default function ItemListContainer({ onItemAdded }) {
+  const handleItemAdded = (quantity) => {
+    onItemAdded(quantity);
+    console.log(`Item added with quantity: ${quantity}`);
+  };
+
   const products = [
     {
       id: "1",
@@ -59,8 +64,8 @@ export default function ItemListContainer() {
   return (
     <main className="flex justify-center items-center w-full h-auto">
       <h1 className="text-xl text-center">Welcome to MyNikes! (in progress)</h1>
-      [!items ? <div>Loading...</div> : <ItemList items={items} />]
-      <ItemCount />
+      {!items ? <div>Loading...</div> : <ItemList items={items} />}
+      <ItemCount onItemAdded={handleItemAdded} />
     </main>
   );
 }

@@ -1,6 +1,11 @@
 import { HiOutlineShoppingCart } from "react-icons/hi2";
+import { useEffect } from "react";
 
 export default function CartWidget({ itemCount }) {
+  useEffect(() => {
+    console.log("Itemsssssss on cart:", itemCount);
+  }, [itemCount]);
+
   return (
     <div className="cursor-pointer hover:bg-gray-300 p-[10px] flex items-center justify-center rounded-full relative">
       <HiOutlineShoppingCart size={24} />

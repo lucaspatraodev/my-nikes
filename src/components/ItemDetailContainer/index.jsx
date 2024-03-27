@@ -1,8 +1,12 @@
 import { useEffect, useState } from "react";
 import ItemDetail from "../ItemDetail";
 
-export default function ItemDetailContainer({ selectedItem }) {
+export default function ItemDetailContainer({ selectedItem, onItemAdded }) {
   const [item, setItem] = useState(null);
+  const handleItemAdded = (quantity) => {
+    onItemAdded(quantity);
+    console.log(`Item added with quantity: ${quantity}`);
+  };
 
   const getItem = () => {
     return new Promise((resolve) => {
@@ -26,6 +30,12 @@ export default function ItemDetailContainer({ selectedItem }) {
   }, []);
 
   return (
-    <div>{!item ? <div>Loading...</div> : <ItemDetail item={item} />}</div>
+    <div>
+      {item ? (
+        <ItemDetail item={item} onItemAdded={handleItemAdded} />
+      ) : (
+        <div>Loading...</div>
+      )}
+    </div>
   );
 }
