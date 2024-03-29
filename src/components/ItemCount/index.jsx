@@ -1,14 +1,22 @@
 import { useState } from "react";
 
-export default function ItemCount({ onItemAdded }) {
+export default function ItemCount({ item, stock, onItemAdded }) {
   const [count, setCount] = useState(0);
-  const [stock, setStock] = useState(5);
-
   const [isAdded, setIsAdded] = useState(false);
 
   const handleAdd = () => {
+    if (count === 0) return;
+    if (count > 1) {
+      let items = [];
+      for (let i = 0; i < count; i++) {
+        items.push(item);
+      }
+      onItemAdded(items);
+    } else if (count === 1) {
+      onItemAdded(item);
+    }
+
     setIsAdded(true);
-    onItemAdded(count);
   };
 
   const increment = () => {
@@ -32,6 +40,7 @@ export default function ItemCount({ onItemAdded }) {
           -
         </button>
         <span className="mx-4">{count}</span>
+
         <button
           className="bg-teal-950 hover:bg-teal-900 text-white font-bold py-2 px-4 rounded"
           onClick={increment}

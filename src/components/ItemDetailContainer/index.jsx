@@ -1,9 +1,19 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import ItemDetail from "../ItemDetail";
+import { useParams } from "react-router-dom";
 
-export default function ItemDetailContainer({ selectedItem, onItemAdded }) {
-  const [item, setItem] = useState(null);
+export default function ItemDetailContainer({
+  CartItems,
+  setCartItems,
+  products,
+  onItemAdded,
+}) {
+  const { id } = useParams();
+  const selectedItem = products.find((product) => product.id === id);
+  const [itemCart, setItemCart] = useState(null);
+
   const handleItemAdded = (quantity) => {
+    setCartItems(CartItems.find((item) => item.id === id));
     onItemAdded(quantity);
     console.log(`Item added with quantity: ${quantity}`);
   };
@@ -20,7 +30,7 @@ export default function ItemDetailContainer({ selectedItem, onItemAdded }) {
     const fetchItem = async () => {
       try {
         const newItem = await getItem();
-        setItem(newItem);
+        setItemCart(newItem);
       } catch (error) {
         console.error("Error fetching item:", error);
       }
@@ -31,8 +41,8 @@ export default function ItemDetailContainer({ selectedItem, onItemAdded }) {
 
   return (
     <div>
-      {item ? (
-        <ItemDetail item={item} onItemAdded={handleItemAdded} />
+      {itemCart ? (
+        <ItemDetail item={itemCart} onItemAdded={handleItemAdded} />
       ) : (
         <div>Loading...</div>
       )}

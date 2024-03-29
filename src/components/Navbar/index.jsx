@@ -32,17 +32,17 @@ export default function Navbar({ itemsOnCart = 0 }) {
   ];
 
   useEffect(() => {
-    console.log("Items on cart:", itemsOnCart);
+    console.log("Total de itens no carrinho:", itemsOnCart.length);
   }, [itemsOnCart]);
 
   return (
-    <nav className="fixed w-screen h-16 p-4 flex justify-between bg-[#FDFDFD]">
-      <h1 className="font-TitanOne text-xl">MyNikes</h1>
+    <nav className="fixed w-screen max-h-[10vh] p-4 flex justify-between bg-[#FDFDFD]">
+      <h1 className="font-TitanOne text-xl text-[#582f0e]">MyNikes</h1>
       <ul className="flex items-center justify-center gap-6 font-bold">
         {listItems.map((item) => (
           <li
             key={item.id}
-            className="relative text-lg w-fit block cursor-pointer after:block after:content-[''] after:absolute after:h-[3px] after:bg-black after:w-full after:scale-x-0 after:hover:scale-x-100 after:transition after:duration-300 after:origin-center"
+            className="relative text-lg w-fit block cursor-pointer after:block after:content-[''] after:absolute after:h-[3px] after:bg-[#582f0e] after:w-full after:scale-x-0 after:hover:scale-x-100 after:transition after:duration-300 after:origin-center"
           >
             {item.title}
           </li>
