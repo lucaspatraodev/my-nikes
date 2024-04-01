@@ -1,9 +1,9 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import ItemDetailContainer from "./components/ItemDetailContainer";
-import ItemListContainer from "./components/ItemListContainer";
-import Navbar from "./components/Navbar";
-import { useContext } from "react";
-import { CartProvider, CartContext } from "./components/CartContext.jsx";
+import ItemDetailContainer from "./components/Detail/ItemDetailContainer";
+import ItemListContainer from "./components/ItemList/ItemListContainer";
+import Navbar from "./components/Navbar/Navbar";
+import { CartProvider } from "./components/Cart/CartContext";
+import CartView from "./components/Cart/CartView";
 
 function App() {
   const products = [
@@ -45,39 +45,21 @@ function App() {
     },
   ];
 
-  // const handleItemAddedToCart = (newItems) => {
-  //   setCartItems((prevItems) => [...prevItems, newItems]);
-  // };
-
-  const cartContext = useContext(CartContext);
-
-  const cartItems = cartContext ? cartContext.cartItems : [];
-  const setCartItems = cartContext ? cartContext.setCartItems : () => {};
-
   return (
     <CartProvider>
       <Router>
         <Navbar />
-        <main className="h-screen w-screen bg-white flex justify-center items-center">
+        <main className="h-screen w-screen bg-white flex justify-center items-center z-0">
           <Routes>
             <Route
               path="/"
-              element={
-                <ItemListContainer
-                  products={cartItems}
-                  setCartItems={setCartItems}
-                />
-              }
+              element={<ItemListContainer products={products} />}
             />
             <Route
               path={`/product-detail/:id`}
-              element={
-                <ItemDetailContainer
-                  products={cartItems}
-                  setCartItems={setCartItems}
-                />
-              }
+              element={<ItemDetailContainer products={products} />}
             />
+            <Route path="/cart" element={<CartView />} />
           </Routes>
         </main>
       </Router>

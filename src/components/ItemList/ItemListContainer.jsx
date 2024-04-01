@@ -1,4 +1,4 @@
-import ItemList from "../ItemList";
+import ItemList from "./ItemList";
 import { useEffect, useState } from "react";
 
 export default function ItemListContainer({ products }) {
