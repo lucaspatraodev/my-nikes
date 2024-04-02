@@ -3,6 +3,30 @@ import { createContext, useState } from "react";
 export const CartContext = createContext(undefined);
 
 export const CartProvider = ({ children }) => {
+  const [order, setOrder] = useState(undefined);
+
+  const createNewOrder = () => {
+    let items = cartItems;
+
+    let newOrder = {
+      buyer: {
+        name: buyerData.name,
+        phone: buyerData.phone,
+        email: buyerData.email,
+      },
+      items: items,
+      total: items.reduce((acc, item) => acc + item.price * item.quantity, 0),
+    };
+    console.log(newOrder);
+    setOrder(newOrder);
+  };
+
+  const [buyerData, setBuyerData] = useState({
+    name: "Lucas de Castro",
+    phone: "(11) 99999-9999",
+    email: "lucasdecastropatrao@gmail.com",
+  });
+
   const [cartItems, setCartItems] = useState([]);
   const [cartItemsQuantity, setCartItemsQuantity] = useState(0);
 
@@ -46,6 +70,9 @@ export const CartProvider = ({ children }) => {
   return (
     <CartContext.Provider
       value={{
+        createNewOrder,
+        buyerData,
+        setBuyerData,
         addItemToCart,
         cartItems,
         setCartItems,

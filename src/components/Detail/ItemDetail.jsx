@@ -6,6 +6,8 @@ export default function ItemDetail({ item }) {
   const cartItems = useContext(CartContext).cartItems;
   const setCartItemsQuantity = useContext(CartContext).setCartItemsQuantity;
   const addItemToCart = useContext(CartContext).addItemToCart;
+  const createNewOrder = useContext(CartContext).createNewOrder;
+  const order = useContext(CartContext).order;
 
   const handleItemAdded = (count) => {
     addItemToCart(cartItems, item, count);
@@ -25,6 +27,20 @@ export default function ItemDetail({ item }) {
             stock={item.stock}
             onAddClick={(count) => handleItemAdded(count)}
           />
+          <button
+            className="w-64 h-12 p-4 bg-blue-500 text-white font-bold text-xl rounded-md"
+            onClick={() => createNewOrder()}
+          >
+            CreateOrder
+          </button>
+          <button
+            className="w-64 h-12 p-4 bg-red-500 text-white font-bold text-xl rounded-md"
+            onClick={() => {
+              console.log(order);
+            }}
+          >
+            Ihu
+          </button>
         </div>
       </div>
     </>
