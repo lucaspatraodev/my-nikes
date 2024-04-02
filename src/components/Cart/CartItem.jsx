@@ -7,7 +7,7 @@ export default function CartItem({ item }) {
         className="w-[100px] h-[100px] object-cover"
       />
       <div>
-        <h2>{item.name}</h2>
+        <h2>{item.title}</h2>
         <p>{item.price}</p>
         <p>Quantity: {item.quantity}</p>
       </div>

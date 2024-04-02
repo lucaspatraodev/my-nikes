@@ -49,7 +49,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="fixed w-screen max-h-[10vh] p-4 flex justify-between bg-[#FDFDFD]">
+    <nav className="fixed w-screen max-h-[10vh] p-4 flex justify-between items-center bg-[#FDFDFD]">
       <Link to={"/"}>
         <h1 className="font-TitanOne text-xl text-[#582f0e] cursor-pointer">
           MyNikes

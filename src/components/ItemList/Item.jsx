@@ -15,7 +15,7 @@ export default function Item({ item }) {
           onMouseOut={() => setHovered(false)}
         />
         <div className="p-1">
-          <h2 className="">{item.name}</h2>
+          <h2 className="">{item.title}</h2>
           <p className="font-bold">${item.price}</p>
         </div>
       </div>

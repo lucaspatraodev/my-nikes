@@ -1,14 +1,9 @@
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { HiOutlineShoppingCart } from "react-icons/hi2";
 import { CartContext } from "./CartContext";
 
 export default function CartWidget({ cartClicked }) {
   const itemQuantityOnCart = useContext(CartContext).cartItemsQuantity;
-
-  useEffect(() => {
-    console.log("cartWidget rendered");
-  }),
-    [itemQuantityOnCart];
 
   const handleClick = () => {
     cartClicked();
