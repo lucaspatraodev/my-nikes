@@ -3,6 +3,7 @@ import { createContext, useState } from "react";
 export const CartContext = createContext(undefined);
 
 export const CartProvider = ({ children }) => {
+  const [orderStage, setOrderStage] = useState(1);
   const [order, setOrder] = useState(undefined);
 
   const createNewOrder = () => {
@@ -70,6 +71,10 @@ export const CartProvider = ({ children }) => {
   return (
     <CartContext.Provider
       value={{
+        orderStage,
+        setOrderStage,
+        order,
+        setOrder,
         createNewOrder,
         buyerData,
         setBuyerData,

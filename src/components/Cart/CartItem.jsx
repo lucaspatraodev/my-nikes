@@ -1,6 +1,9 @@
 export default function CartItem({ item }) {
   return (
-    <div key={item.id} className="flex items-center gap-4 bg-white text-black">
+    <div
+      key={item.id}
+      className="flex items-center gap-4 bg-white text-black w-full h-24"
+    >
       <img
         src={item.firstImage}
         alt={item.name}
