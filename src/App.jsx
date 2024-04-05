@@ -51,13 +51,14 @@ function App() {
         <Navbar />
         <main className="h-screen w-screen bg-white flex justify-center items-center z-0">
           <Routes>
-            <Route
-              path="/"
-              element={<ItemListContainer products={products} />}
-            />
+            <Route path="/" element={<ItemListContainer />} />
             <Route
               path={`/product-detail/:id`}
               element={<ItemDetailContainer products={products} />}
+            />
+            <Route
+              path={`/category/:id/:title`}
+              element={<ItemListContainer products={products} />}
             />
             <Route path="/cart" element={<CartView />} />
           </Routes>

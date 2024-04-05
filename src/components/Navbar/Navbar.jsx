@@ -17,27 +17,22 @@ export default function Navbar() {
     {
       id: 1,
       title: "New",
-      route: "/",
     },
     {
       id: 2,
       title: "Air Max",
-      route: "/",
     },
     {
       id: 3,
       title: "Air Force",
-      route: "/",
     },
     {
       id: 4,
       title: "Dunk",
-      route: "/",
     },
     {
       id: 5,
       title: "Collabs",
-      route: "/",
     },
   ];
 
@@ -57,12 +52,11 @@ export default function Navbar() {
       </Link>
       <ul className="flex items-center justify-center gap-6 font-bold">
         {listItems.map((item) => (
-          <li
-            key={item.id}
-            className="relative text-lg w-fit block cursor-pointer hover:text-[#582f0e] after:block after:content-[''] after:absolute after:h-[3px] after:bg-[#582f0e] after:w-full after:scale-x-0 after:hover:scale-x-100 after:transition after:duration-300 after:origin-center"
-          >
-            {item.title}
-          </li>
+          <Link key={item.id} to={`/category/${item.id}/${item.title}`}>
+            <li className="relative text-lg w-fit block cursor-pointer hover:text-[#582f0e] after:block after:content-[''] after:absolute after:h-[3px] after:bg-[#582f0e] after:w-full after:scale-x-0 after:hover:scale-x-100 after:transition after:duration-300 after:origin-center">
+              {item.title}
+            </li>
+          </Link>
         ))}
       </ul>
       <div className="flex gap-2 items-center">
