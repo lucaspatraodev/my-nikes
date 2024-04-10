@@ -19,10 +19,8 @@ export default function ItemListContainer() {
           console.log("if");
           const querySnapshot = await getDocs(q);
           const itemsData = querySnapshot.docs.map((doc) => doc.data());
-          console.log(itemsData);
           setItems(itemsData);
         } else {
-          console.log("else");
           const querySnapshot = await getDocs(collectionRef);
           const itemsData = querySnapshot.docs.map((doc) => doc.data());
           setItems(itemsData);

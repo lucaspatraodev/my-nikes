@@ -4,6 +4,7 @@ import CartItem from "../CartItem";
 import OrderProgressBar from "./OrderProgressBar";
 
 export default function CartView() {
+  const sendOrder = useContext(CartContext).sendOrder;
   const cartItems = useContext(CartContext).cartItems;
   // const setOrderStage = useContext(CartContext).setOrderStage;
   const orderStage = useContext(CartContext).orderStage;
@@ -19,6 +20,14 @@ export default function CartView() {
           return <CartItem key={item.id} item={item} />;
         })}
       </div>
+      <button
+        onClick={() => {
+          sendOrder();
+        }}
+        className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full"
+      >
+        Finish order
+      </button>
     </section>
   );
 }

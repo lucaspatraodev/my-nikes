@@ -1,7 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 
-const firebaseConfig = {
+export const firebaseConfig = {
   apiKey: "AIzaSyDNQ5y5Et6c8QepoARB1DuF49WhNhwF7to",
   authDomain: "my-nikes-db.firebaseapp.com",
   projectId: "my-nikes-db",

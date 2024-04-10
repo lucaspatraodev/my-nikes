@@ -1,15 +1,25 @@
 import { createContext, useState } from "react";
+import { addDoc, collection } from "firebase/firestore";
+import { db } from "../ItemCollection.jsx";
 
 export const CartContext = createContext(undefined);
 
 export const CartProvider = ({ children }) => {
   const [orderStage, setOrderStage] = useState(1);
   const [order, setOrder] = useState(undefined);
+  const [orderID, setOrderID] = useState(null);
+  const ordersCollection = collection(db, "orders");
 
-  const createNewOrder = () => {
+  const [buyerData, setBuyerData] = useState({
+    name: "Lucas de Castro",
+    phone: "(11) 99999-9999",
+    email: "lucasdecastropatrao@gmail.com",
+  });
+
+  const sendOrder = () => {
     let items = cartItems;
 
-    let newOrder = {
+    const order = {
       buyer: {
         name: buyerData.name,
         phone: buyerData.phone,
@@ -18,15 +28,26 @@ export const CartProvider = ({ children }) => {
       items: items,
       total: items.reduce((acc, item) => acc + item.price * item.quantity, 0),
     };
-    console.log(newOrder);
-    setOrder(newOrder);
+    addDoc(ordersCollection, order).then(({ id }) => setOrderID(id));
+    console.log(orderID);
   };
 
-  const [buyerData, setBuyerData] = useState({
-    name: "Lucas de Castro",
-    phone: "(11) 99999-9999",
-    email: "lucasdecastropatrao@gmail.com",
-  });
+  // const createNewOrder = () => {
+  //   const ordersCollection = collection(db, "orders");
+
+  //   let items = cartItems;
+
+  //   let newOrder = {
+  //     buyer: {
+  //       name: buyerData.name,
+  //       phone: buyerData.phone,
+  //       email: buyerData.email,
+  //     },
+  //     items: [items],
+  //   };
+  //   console.log(newOrder);
+  //   setOrder(newOrder);
+  // };
 
   const [cartItems, setCartItems] = useState([]);
   const [cartItemsQuantity, setCartItemsQuantity] = useState(0);
@@ -75,7 +96,7 @@ export const CartProvider = ({ children }) => {
         setOrderStage,
         order,
         setOrder,
-        createNewOrder,
+        sendOrder,
         buyerData,
         setBuyerData,
         addItemToCart,
