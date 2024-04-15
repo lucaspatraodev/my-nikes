@@ -10,13 +10,7 @@ export const CartProvider = ({ children }) => {
   const [orderID, setOrderID] = useState(null);
   const ordersCollection = collection(db, "orders");
 
-  const [buyerData, setBuyerData] = useState({
-    name: "Lucas de Castro",
-    phone: "(11) 99999-9999",
-    email: "lucasdecastropatrao@gmail.com",
-  });
-
-  const sendOrder = () => {
+  const sendOrder = (buyerData) => {
     let items = cartItems;
 
     const order = {
@@ -28,26 +22,11 @@ export const CartProvider = ({ children }) => {
       items: items,
       total: items.reduce((acc, item) => acc + item.price * item.quantity, 0),
     };
-    addDoc(ordersCollection, order).then(({ id }) => setOrderID(id));
-    console.log(orderID);
+
+    console.log(order);
+    // addDoc(ordersCollection, order).then(({ id }) => setOrderID(id));
+    // console.log(orderID);
   };
-
-  // const createNewOrder = () => {
-  //   const ordersCollection = collection(db, "orders");
-
-  //   let items = cartItems;
-
-  //   let newOrder = {
-  //     buyer: {
-  //       name: buyerData.name,
-  //       phone: buyerData.phone,
-  //       email: buyerData.email,
-  //     },
-  //     items: [items],
-  //   };
-  //   console.log(newOrder);
-  //   setOrder(newOrder);
-  // };
 
   const [cartItems, setCartItems] = useState([]);
   const [cartItemsQuantity, setCartItemsQuantity] = useState(0);
@@ -97,8 +76,6 @@ export const CartProvider = ({ children }) => {
         order,
         setOrder,
         sendOrder,
-        buyerData,
-        setBuyerData,
         addItemToCart,
         cartItems,
         setCartItems,
